@@ -14,12 +14,14 @@ export default function App() {
     path.mkdirSync(folderName);
   } */
   const [meme, setMeme] = useState(
-    'https://api.memegen.link/images/puffin/.jpg',
+    'https://api.memegen.link/images/puffin/.png',
   );
   const [userMeme, setUserMeme] = useState('');
   // const onClick = ({ target: { value } }) =>
   //   setMeme('https://api.memegen.link/images/' + value + '/.jpg');
   //   const onChange = ({ target: { value } }) =>
+  const [topText, setTopText] = useState('');
+  const [bottomText, setBottomText] = useState('');
   const downloadImage = () => {
     saveAs(meme, folderName);
   };
@@ -35,7 +37,7 @@ export default function App() {
       <div>
         <button
           onClick={() => {
-            setMeme('https://api.memegen.link/images/' + userMeme + '/.jpg');
+            setMeme('https://api.memegen.link/images/' + userMeme + '/.png');
           }}
         >
           Generate
@@ -52,22 +54,64 @@ export default function App() {
       </div>
       <label>
         Top text
-        <input style={{ margin: 5 }} type="" />
-      </label>
-      <label>
-        Bottom text
-        <input style={{ margin: 5 }} type="" />
-      </label>
-      <label>
-        Meme template
-        {/* <TextBox type="email" onChange={onChange} value={email} /> */}
         <input
           style={{ margin: 5 }}
           type=""
-          // onKeyDown={onChange}
-          // value={templateMeme}
+          value={topText}
+          onChange={(event) => {
+            const userTopText = event.currentTarget.value;
+            setTopText(userTopText);
+            setMeme(
+              'https://api.memegen.link/images/' +
+                userMeme +
+                '/' +
+                userTopText +
+                '/.png',
+            );
+          }}
         />
       </label>
+      <label>
+        Bottom text
+        <input
+          style={{ margin: 5 }}
+          type=""
+          value={bottomText}
+          onChange={(event) => {
+            const userBottomText = event.currentTarget.value;
+            setBottomText(userBottomText);
+            topText
+              ? setMeme(
+                  'https://api.memegen.link/images/' +
+                    userMeme +
+                    '/' +
+                    topText +
+                    '/' +
+                    userBottomText +
+                    '/.png',
+                )
+              : setMeme(
+                  'https://api.memegen.link/images/' +
+                    userMeme +
+                    '/' +
+                    '_' +
+                    '/' +
+                    userBottomText +
+                    '/.png',
+                );
+          }}
+        />
+      </label>
+      {/* {<label>
+        Meme template */}
+      {/* <TextBox type="email" onChange={onChange} value={email} /> */}
+      {/* <input
+          style={{ margin: 5 }}
+          type="" */}
+      {/* // onKeyDown={onChange}
+          // value={templateMeme}
+        />
+      </label>} */}
       <div>
         <button
           onClick={() => {
