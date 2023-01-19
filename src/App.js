@@ -1,3 +1,5 @@
+// import axios from 'axios';
+import { saveAs } from 'file-saver';
 import { useState } from 'react';
 
 export default function App() {
@@ -7,6 +9,10 @@ export default function App() {
   //     src="https://api.memegen.link/images/puffin/I_don't_find_Mitch_Hedberg/all_the_funny.png"
   //   />
   // );
+  const folderName = './images';
+  /* if (!path.existsSync(folderName)) {
+    path.mkdirSync(folderName);
+  } */
   const [meme, setMeme] = useState(
     'https://api.memegen.link/images/puffin/.jpg',
   );
@@ -14,6 +20,9 @@ export default function App() {
   // const onClick = ({ target: { value } }) =>
   //   setMeme('https://api.memegen.link/images/' + value + '/.jpg');
   //   const onChange = ({ target: { value } }) =>
+  const downloadImage = () => {
+    saveAs(meme, folderName);
+  };
   return (
     <body
       style={{
@@ -60,7 +69,13 @@ export default function App() {
         />
       </label>
       <div>
-        <button>Download</button>
+        <button
+          onClick={() => {
+            downloadImage();
+          }}
+        >
+          Download
+        </button>
       </div>
       <div>
         <img data-test-id="meme-image" alt="A generated meme" src={meme} />
