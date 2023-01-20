@@ -17,7 +17,7 @@ export default function App() {
   const [meme, setMeme] = useState(
     'https://api.memegen.link/images/puffin/.png',
   );
-  const [userMeme, setUserMeme] = useState('');
+  const [userMeme, setUserMeme] = useState('puffin');
   // const onClick = ({ target: { value } }) =>
   //   setMeme('https://api.memegen.link/images/' + value + '/.jpg');
   //   const onChange = ({ target: { value } }) =>
@@ -48,7 +48,19 @@ export default function App() {
               setUserMeme(enteredUserMeme);
             }}
             onKeyDown={() => {
-              setMeme('https://api.memegen.link/images/' + userMeme + '/.png');
+              !topText && !bottomText
+                ? setMeme(
+                    'https://api.memegen.link/images/' + userMeme + '/.png',
+                  )
+                : setMeme(
+                    'https://api.memegen.link/images/' +
+                      userMeme +
+                      '/' +
+                      topText +
+                      '/' +
+                      bottomText +
+                      '/.png',
+                  );
             }}
           />
         </label>
@@ -129,6 +141,7 @@ export default function App() {
                     userBottomText +
                     '/.png',
                 );
+            console.log(meme);
           }}
         />
       </label>
