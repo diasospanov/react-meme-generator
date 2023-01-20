@@ -13,6 +13,7 @@ export default function App() {
   /* if (!path.existsSync(folderName)) {
     path.mkdirSync(folderName);
   } */
+  // const defaultMemeSettings = 'https://api.memegen.link/images/puffin/.png';
   const [meme, setMeme] = useState(
     'https://api.memegen.link/images/puffin/.png',
   );
@@ -25,6 +26,7 @@ export default function App() {
   const downloadImage = () => {
     saveAs(meme, folderName);
   };
+
   return (
     <body
       style={{
@@ -35,22 +37,25 @@ export default function App() {
     >
       <h1>A Meme Generator</h1>
       <div>
+        <label>
+          Meme template
+          <input
+            style={{ margin: 5 }}
+            type=""
+            value={userMeme}
+            onChange={(event) => {
+              setUserMeme(event.currentTarget.value);
+            }}
+          />
+        </label>
         <button
+          data-test-id="generate-meme"
           onClick={() => {
             setMeme('https://api.memegen.link/images/' + userMeme + '/.png');
           }}
         >
           Generate
         </button>
-        {/* <TextBox type="email" onChange={onChange} value={email} /> */}
-        <input
-          style={{ margin: 5 }}
-          type=""
-          value={userMeme}
-          onChange={(event) => {
-            setUserMeme(event.currentTarget.value);
-          }}
-        />
       </div>
       <label>
         Top text
@@ -61,13 +66,34 @@ export default function App() {
           onChange={(event) => {
             const userTopText = event.currentTarget.value;
             setTopText(userTopText);
-            setMeme(
-              'https://api.memegen.link/images/' +
-                userMeme +
-                '/' +
-                userTopText +
-                '/.png',
-            );
+            bottomText
+              ? setMeme(
+                  'https://api.memegen.link/images/' +
+                    userMeme +
+                    '/' +
+                    userTopText +
+                    '/' +
+                    bottomText +
+                    '/.png',
+                )
+              : setMeme(
+                  'https://api.memegen.link/images/' +
+                    userMeme +
+                    '/' +
+                    userTopText +
+                    '/.png',
+                );
+            !topText && !bottomText
+              ? setMeme(meme)
+              : setMeme(
+                  'https://api.memegen.link/images/' +
+                    userMeme +
+                    '/' +
+                    topText +
+                    '/' +
+                    bottomText +
+                    '/.png',
+                );
           }}
         />
       </label>
