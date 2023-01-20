@@ -44,7 +44,11 @@ export default function App() {
             type=""
             value={userMeme}
             onChange={(event) => {
-              setUserMeme(event.currentTarget.value);
+              const enteredUserMeme = event.currentTarget.value;
+              setUserMeme(enteredUserMeme);
+            }}
+            onKeyDown={() => {
+              setMeme('https://api.memegen.link/images/' + userMeme + '/.png');
             }}
           />
         </label>
@@ -83,7 +87,7 @@ export default function App() {
                     userTopText +
                     '/.png',
                 );
-            !topText && !bottomText
+            /* !topText && !bottomText
               ? setMeme(meme)
               : setMeme(
                   'https://api.memegen.link/images/' +
@@ -93,7 +97,7 @@ export default function App() {
                     '/' +
                     bottomText +
                     '/.png',
-                );
+                ); */
           }}
         />
       </label>
