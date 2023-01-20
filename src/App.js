@@ -17,7 +17,7 @@ export default function App() {
   const [meme, setMeme] = useState(
     'https://api.memegen.link/images/puffin/.png',
   );
-  const [userMeme, setUserMeme] = useState('puffin');
+  const [userMeme, setUserMeme] = useState('');
   // const onClick = ({ target: { value } }) =>
   //   setMeme('https://api.memegen.link/images/' + value + '/.jpg');
   //   const onChange = ({ target: { value } }) =>
@@ -28,7 +28,7 @@ export default function App() {
   };
 
   return (
-    <body
+    <section
       style={{
         display: 'grid',
         alignItems: 'center',
@@ -48,19 +48,7 @@ export default function App() {
               setUserMeme(enteredUserMeme);
             }}
             onKeyDown={() => {
-              !topText && !bottomText
-                ? setMeme(
-                    'https://api.memegen.link/images/' + userMeme + '/.png',
-                  )
-                : setMeme(
-                    'https://api.memegen.link/images/' +
-                      userMeme +
-                      '/' +
-                      topText +
-                      '/' +
-                      bottomText +
-                      '/.png',
-                  );
+              setMeme('https://api.memegen.link/images/' + userMeme + '/.png');
             }}
           />
         </label>
@@ -167,6 +155,6 @@ export default function App() {
       <div>
         <img data-test-id="meme-image" alt="A generated meme" src={meme} />
       </div>
-    </body>
+    </section>
   );
 }
