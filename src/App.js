@@ -3,20 +3,15 @@ import { saveAs } from 'file-saver';
 import { useState } from 'react';
 
 export default function App() {
-  // const defaultMeme = (
-  //   <img
-  //     alt="Puffin"
-  //     src="https://api.memegen.link/images/puffin/I_don't_find_Mitch_Hedberg/all_the_funny.png"
-  //   />
-  // );
   const folderName = './images';
-  /* if (!path.existsSync(folderName)) {
-    path.mkdirSync(folderName);
-  } */
+  const defaultMeme = 'puffin';
   // const defaultMemeSettings = 'https://api.memegen.link/images/puffin/.png';
   const [meme, setMeme] = useState(
-    'https://api.memegen.link/images/puffin/.png',
+    // 'https://api.memegen.link/images/puffin/.png',
+    'https://api.memegen.link/images/' + defaultMeme + '/.png',
   );
+  let enteredUserMeme;
+
   const [userMeme, setUserMeme] = useState('');
   // const onClick = ({ target: { value } }) =>
   //   setMeme('https://api.memegen.link/images/' + value + '/.jpg');
@@ -44,11 +39,22 @@ export default function App() {
             type=""
             value={userMeme}
             onChange={(event) => {
-              const enteredUserMeme = event.currentTarget.value;
+              enteredUserMeme = event.currentTarget.value;
               setUserMeme(enteredUserMeme);
             }}
             onKeyDown={() => {
-              setMeme('https://api.memegen.link/images/' + userMeme + '/.png');
+              !topText && !bottomText
+                ? setMeme(userMeme)
+                : setMeme(
+                    'https://api.memegen.link/images/' +
+                      userMeme +
+                      '/' +
+                      topText +
+                      '/' +
+                      bottomText +
+                      '/.png',
+                  );
+              // setMeme('https://api.memegen.link/images/' + userMeme + '/.png');
             }}
           />
         </label>
@@ -70,6 +76,9 @@ export default function App() {
           onChange={(event) => {
             const userTopText = event.currentTarget.value;
             setTopText(userTopText);
+            if (!enteredUserMeme) {
+              setUserMeme(defaultMeme);
+            }
             bottomText
               ? setMeme(
                   'https://api.memegen.link/images/' +
@@ -110,6 +119,9 @@ export default function App() {
           onChange={(event) => {
             const userBottomText = event.currentTarget.value;
             setBottomText(userBottomText);
+            if (!enteredUserMeme) {
+              setUserMeme(defaultMeme);
+            }
             topText
               ? setMeme(
                   'https://api.memegen.link/images/' +
