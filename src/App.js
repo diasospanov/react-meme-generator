@@ -43,17 +43,17 @@ export default function App() {
               setUserMeme(enteredUserMeme);
             }}
             onKeyDown={() => {
-              !topText && !bottomText
+              /* !topText && !bottomText
                 ? setMeme(userMeme)
-                : setMeme(
-                    'https://api.memegen.link/images/' +
-                      userMeme +
-                      '/' +
-                      topText +
-                      '/' +
-                      bottomText +
-                      '/.png',
-                  );
+                :  */ setMeme(
+                'https://api.memegen.link/images/' +
+                  userMeme +
+                  '/' +
+                  topText +
+                  '/' +
+                  bottomText +
+                  '/.png',
+              );
               // setMeme('https://api.memegen.link/images/' + userMeme + '/.png');
             }}
           />
@@ -79,7 +79,7 @@ export default function App() {
             if (!enteredUserMeme) {
               setUserMeme(defaultMeme);
             }
-            bottomText
+            /* bottomText
               ? setMeme(
                   'https://api.memegen.link/images/' +
                     userMeme +
@@ -89,13 +89,13 @@ export default function App() {
                     bottomText +
                     '/.png',
                 )
-              : setMeme(
-                  'https://api.memegen.link/images/' +
-                    userMeme +
-                    '/' +
-                    userTopText +
-                    '/.png',
-                );
+              :  */ setMeme(
+              'https://api.memegen.link/images/' +
+                userMeme +
+                '/' +
+                userTopText +
+                '/.png',
+            );
             /* !topText && !bottomText
               ? setMeme(meme)
               : setMeme(
@@ -119,20 +119,20 @@ export default function App() {
           onChange={(event) => {
             const userBottomText = event.currentTarget.value;
             setBottomText(userBottomText);
-            if (!enteredUserMeme) {
+            /* if (!enteredUserMeme) {
               setUserMeme(defaultMeme);
-            }
-            topText
-              ? setMeme(
-                  'https://api.memegen.link/images/' +
-                    userMeme +
-                    '/' +
-                    topText +
-                    '/' +
-                    userBottomText +
-                    '/.png',
-                )
-              : setMeme(
+            } */
+            /* topText
+              ?  */ setMeme(
+              'https://api.memegen.link/images/' +
+                userMeme +
+                '/' +
+                topText +
+                '/' +
+                userBottomText +
+                '/.png',
+            );
+            /* : setMeme(
                   'https://api.memegen.link/images/' +
                     userMeme +
                     '/' +
@@ -140,8 +140,8 @@ export default function App() {
                     '/' +
                     userBottomText +
                     '/.png',
-                );
-            console.log(meme);
+                ) */
+            // console.log(meme);
           }}
         />
       </label>
